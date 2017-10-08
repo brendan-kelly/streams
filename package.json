@@ -1,0 +1,7 @@
+{
+  "name": "streams",
+  "version": "0.0.1",
+  "dependencies": {
+    "flow-bin": "^0.56.0"
+  }
+}
