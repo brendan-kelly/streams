@@ -96,20 +96,33 @@ var rl = readline.createInterface({
     terminal: false
 });
 
+var args = process.argv.slice(2);
+var verbose = args.indexOf("--verbose") > -1;
+var hasThroughput = args.indexOf("--throughput") > -1;
+var hasTotalLines = args.indexOf("--total-lines") > -1;
+var hasGrowthrate = args.indexOf("--growth-rate") > -1;
+
 var growthRate = 1;
 var pastTotalLines = 0;
+
 rl.on('line', function(line) {
     totalsDuplex.write(line);
 
     var totals = totalsDuplex.read().toString();
 
-    outputStream.write(totals);
+    if (verbose || hasThroughput) {
+        outputStream.write(totals);
+    }
 
     totalsObj = JSON.parse(totals);
-    console.log("Total lines = " + totalsObj.totalLines);
 
-    var growthRate = (totalsObj.totalLines - pastTotalLines) / pastTotalLines;
-    console.log("Growth rate = " + Math.round(growthRate * 10000) / 10000);
+    if (verbose || hasTotalLines) {
+        console.log("Total lines = " + totalsObj.totalLines);
+    }
 
-    pastTotalLines = totalsObj.totalLines;
+    if (verbose || hasGrowthrate) {
+        var growthRate = (totalsObj.totalLines - pastTotalLines) / pastTotalLines;
+        console.log("Growth rate = " + Math.round(growthRate * 10000) / 10000);
+        pastTotalLines = totalsObj.totalLines;
+    }
 });
