@@ -19,7 +19,6 @@ function TotalsDuplex(options) {
 }
 util.inherits(TotalsDuplex, Duplex);
 
-
 var totalByteLength = 0;
 var totalLines = 0;
 TotalsDuplex.prototype._write = function (chunk, enc, callback) {
@@ -97,12 +96,6 @@ var rl = readline.createInterface({
     terminal: false
 });
 
-function sleep( sleepDuration ){
-    var now = new Date().getTime();
-    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
-}
-
-
 var growthRate = 1;
 var pastTotalLines = 0;
 rl.on('line', function(line) {
@@ -110,13 +103,13 @@ rl.on('line', function(line) {
 
     var totals = totalsDuplex.read().toString();
 
-    outputStream.write(totals)
+    outputStream.write(totals);
 
-    totalsObj = JSON.parse(totals)
+    totalsObj = JSON.parse(totals);
     console.log("Total lines = " + totalsObj.totalLines);
 
     var growthRate = (totalsObj.totalLines - pastTotalLines) / pastTotalLines;
-    console.log("Growth rate = " + Math.round(growthRate * 100) / 100);
+    console.log("Growth rate = " + Math.round(growthRate * 10000) / 10000);
 
     pastTotalLines = totalsObj.totalLines;
 });
