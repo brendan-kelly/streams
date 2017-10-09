@@ -50,7 +50,7 @@ TotalsDuplex.prototype._read = function readBytes(size) {
         }
     }  if (this.totals) {
         readBytes.bind(this)
-    } else { // we are done, push null to end stream
+    } else {
         this.push(null);
     }
 };
@@ -96,7 +96,7 @@ ThroughputStream.prototype._read = function readBytes(size) {
         }
     }  if (this.throughput) {
         readBytes.bind(this)
-    } else { // we are done, push null to end stream
+    } else {
         this.push(null);
     }
 };
@@ -143,12 +143,6 @@ output = function () {
             pastTotalLines = totalsObj.totalLines;
         }
     });
-};
-
-module.exports = {
-    out: function () {
-        output();
-    }
 };
 
 output();
