@@ -1,13 +1,19 @@
 # streams
 
+Installing:
+
+`npm install`
+
 Usage:
 
-`tail logfile.txt | node stream.js --verbose`
+`tail logfile.txt | node streamer.js --verbose`
 
-`tail logfile.txt | node stream.js --growth-rate --throughput --total-lines`
+Usage where each argument is optional
 
-Testing (tests pass if there is no assertion error):
+`tail logfile.txt | node streamer.js --growth-rate --throughput --total-lines`
 
-`echo 'log entry 1' | node streamer.js  --total-lines | node tests/testTotalLines.js`
+Testing (tests pass if there are no assertion errors):
 
-`echo 'log entry 2' | node streamer.js  --growth-rate | node tests/testGrowthRate.js`
+`chmod +x test.sh`
+
+`./test.sh`
