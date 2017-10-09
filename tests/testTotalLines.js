@@ -8,5 +8,5 @@ var rl = readline.createInterface({
 });
 
 rl.on('line', function (line) {
-    assert.deepEqual(line, "Total lines = 1");
+    assert.equal(line, "Total lines = 1");
 });
